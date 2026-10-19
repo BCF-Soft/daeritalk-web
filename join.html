@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대리톡 테스트 참여</title>
+<meta property="og:title" content="대리톡 테스트 참여">
+<meta property="og:description" content="탭 세 번이면 설치 끝">
+<meta property="og:image" content="https://bcf-soft.github.io/daeritalk-web/icon.png">
+<style>
+  :root { --bg:#130f38; --card:#1f1a52; --line:#2f2970; --text:#fff; --muted:#b9b6d8; --accent:#fdd456; --ink:#130f38; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 16px 48px; line-height: 1.5; }
+  .top { display:flex; align-items:center; gap:16px; margin-bottom: 8px; }
+  .top img { width:72px; height:72px; border-radius:18px; }
+  .top h1 { margin:0; font-size:34px; color:var(--accent); }
+  .lead { margin: 12px 0 28px; font-size:18px; font-weight:600; }
+  .warn { display:none; background:#5a2330; border-radius:12px; padding:14px 16px; margin-bottom:20px; font-weight:600; }
+  a.step { display:flex; align-items:center; gap:16px; padding:20px 18px; margin:12px 0; background:var(--card); border:1px solid var(--line); border-radius:16px; color:var(--text); text-decoration:none; font-size:20px; font-weight:700; }
+  a.step .n { flex:none; width:44px; height:44px; border-radius:22px; background:var(--accent); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:22px; }
+  a.step .s { display:block; font-size:15px; font-weight:500; color:var(--muted); margin-top:2px; }
+  a.step.done { opacity:.45; }
+  a.step.done .n { background:#4ade80; }
+  .foot { margin-top:28px; font-size:15px; color:var(--muted); text-align:center; }
+</style>
+</head>
+<body>
+<div class="top"><img src="icon.png" alt=""><h1>대리톡</h1></div>
+<div class="lead">탭 세 번이면 설치 끝</div>
+<div class="warn" id="warn">안드로이드 폰에서 열어 주세요</div>
+
+<a class="step" data-k="1" href="https://groups.google.com/g/daeritalk-tester">
+  <span class="n">1</span><span>모임 가입<span class="s">[그룹 가입] 누르기</span></span></a>
+<a class="step" data-k="2" href="https://play.google.com/apps/testing/com.bcfsoft.daeritalk">
+  <span class="n">2</span><span>테스터 되기<span class="s">[테스터 되기] 누르기</span></span></a>
+<a class="step" data-k="3" href="https://play.google.com/store/apps/details?id=com.bcfsoft.daeritalk">
+  <span class="n">3</span><span>설치하기<span class="s">[설치] 누르기</span></span></a>
+
+<div class="foot">14일 동안 지우지 말아 주세요 🙏</div>
+
+<script>
+  if (!/android/i.test(navigator.userAgent)) document.getElementById('warn').style.display = 'block';
+  document.querySelectorAll('a.step').forEach(function (a) {
+    var key = 'join_done_' + a.dataset.k;
+    try { if (localStorage.getItem(key)) a.classList.add('done'); } catch (e) {}
+    a.addEventListener('click', function () {
+      a.classList.add('done');
+      try { localStorage.setItem(key, '1'); } catch (e) {}
+    });
+  });
+</script>
+</body>
+</html>
