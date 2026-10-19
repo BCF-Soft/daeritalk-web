@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대리톡 계정 삭제 요청</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif; max-width: 480px; margin: 0 auto; padding: 24px 16px; line-height: 1.6; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  h2 { font-size: 17px; margin: 20px 0 4px; }
+  ul { margin: 0; padding-left: 20px; }
+  label { display: block; margin-top: 16px; font-weight: 600; }
+  input, textarea { width: 100%; box-sizing: border-box; padding: 10px; font-size: 16px; border: 1px solid #8886; border-radius: 8px; }
+  button { margin-top: 20px; width: 100%; padding: 14px; font-size: 17px; font-weight: 700; border: 0; border-radius: 10px; background: #e5484d; color: #fff; }
+  .note { color: #888; font-size: 14px; }
+  #done { display: none; margin-top: 24px; font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>대리톡 계정 삭제 요청</h1>
+<p class="note">앱 안에서는 설정 › 내 계정 › 회원 탈퇴로 바로 지울 수 있습니다.</p>
+<p class="note">이 페이지로 요청하면 7일 안에 지우고 알려 드립니다.</p>
+<h2>지우는 것(바로)</h2>
+<ul class="note">
+  <li>닉네임·프로필 사진·전화번호·카카오 연결</li>
+  <li>랭킹 기록·운행 내역, 친구·친구 위치·콕·대화</li>
+  <li>게시판·지원요청 글 내용과 전화번호, 뒷차모드 짝·위치</li>
+  <li>투폰 자료, 연결된 폰 모두 해제</li>
+</ul>
+<h2>남는 것</h2>
+<ul class="note">
+  <li>위치를 보여 준 기록(누가·누구에게·언제, 위치 값 없음): 6개월 — 위치정보법</li>
+  <li>신고 기록: 처리한 날부터 6개월</li>
+  <li>진단 기록: 7일 뒤 저절로 지움</li>
+  <li>남에게 보낸 채팅(암호): 받으면 지움, 못 받으면 14일 뒤</li>
+  <li>결제 기록(있을 때만): 법이 정한 기간</li>
+  <li>폰 안의 운행일지·이동경로·가계부: 앱을 지우면 함께 지워짐</li>
+</ul>
+<form id="f">
+  <label for="n">대리톡 닉네임</label>
+  <input id="n" maxlength="40" required>
+  <label for="c">답장 받을 연락처</label>
+  <input id="c" maxlength="80" required placeholder="전화번호 또는 이메일">
+  <label for="m">남길 말</label>
+  <textarea id="m" maxlength="500" rows="3"></textarea>
+  <button type="submit">삭제 요청</button>
+</form>
+<p id="done">요청을 받았습니다.</p>
+<script>
+  // 올릴 때 아래 값을 Supabase 공개(publishable) 키로 바꾼다 — 공개용 키라 웹에 있어도 됨(이 함수만 부를 수 있음).
+  const URL = 'https://hfayzlclvouhxcndyakv.supabase.co/rest/v1/rpc/delete_request_send';
+  const KEY = 'sb_publishable_V_KTfXRiger3EOTFayKBdw_4sGYyw1b';
+  document.getElementById('f').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const b = e.target.querySelector('button');
+    b.disabled = true;
+    try {
+      const r = await fetch(URL, {
+        method: 'POST',
+        headers: { 'apikey': KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          p_nickname: document.getElementById('n').value,
+          p_contact: document.getElementById('c').value,
+          p_memo: document.getElementById('m').value,
+        }),
+      });
+      if (!r.ok) throw new Error(r.status);
+      e.target.style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+    } catch (_) {
+      alert('보내지 못했습니다. 잠시 뒤 다시 해 주세요.');
+      b.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
