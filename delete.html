@@ -33,7 +33,7 @@
   <li>위치를 보여 준 기록(누가·누구에게·언제, 위치 값 없음): 6개월 — 위치정보법</li>
   <li>신고 기록: 처리한 날부터 6개월</li>
   <li>진단 기록: 7일 뒤 저절로 지움</li>
-  <li>남에게 보낸 채팅(암호): 받으면 지움, 못 받으면 14일 뒤</li>
+  <li>남에게 보낸 채팅: 받으면 지움, 못 받으면 14일 뒤</li>
   <li>결제 기록(있을 때만): 법이 정한 기간</li>
   <li>폰 안의 운행일지·이동경로·가계부: 앱을 지우면 함께 지워짐</li>
 </ul>
@@ -48,7 +48,6 @@
 </form>
 <p id="done">요청을 받았습니다.</p>
 <script>
-  // 올릴 때 아래 값을 Supabase 공개(publishable) 키로 바꾼다 — 공개용 키라 웹에 있어도 됨(이 함수만 부를 수 있음).
   const URL = 'https://hfayzlclvouhxcndyakv.supabase.co/rest/v1/rpc/delete_request_send';
   const KEY = 'sb_publishable_V_KTfXRiger3EOTFayKBdw_4sGYyw1b';
   document.getElementById('f').addEventListener('submit', async (e) => {
