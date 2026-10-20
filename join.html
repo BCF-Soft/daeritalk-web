@@ -31,6 +31,7 @@
   .stuck { margin-top:24px; background:var(--card); border-radius:16px; padding:16px; font-size:16px; }
   .stuck h2 { margin:0 0 10px; font-size:20px; color:var(--accent); }
   .stuck .q { font-weight:800; margin-top:14px; }
+  .sn { display:inline-flex; width:24px; height:24px; border-radius:12px; background:var(--accent); color:var(--ink); align-items:center; justify-content:center; font-size:15px; font-weight:800; vertical-align:-3px; }
   .stuck img { display:block; width:100%; border-radius:12px; border:1px solid var(--line); margin-top:8px; }
   .foot { margin-top:22px; font-size:16px; text-align:center; font-weight:700; }
 </style>
@@ -38,7 +39,7 @@
 <body>
 <div class="top"><img src="icon.png" alt=""><h1>대리톡</h1></div>
 <div class="lead">화면 보면서 따라 누르면 설치 끝</div>
-<div class="warn" id="warn">안드로이드 폰에서 열어 주십시오 (아이폰은 안 됩니다)</div>
+<div class="warn" id="warn">안드로이드 폰에서 열어 주십시오 (아이폰은 추후 출시)</div>
 <div class="same">1 · 2 · 3 모두 <b>플레이 스토어에 쓰는 구글 계정 하나</b>로 합니다</div>
 
 <div class="step" data-k="1">
@@ -85,12 +86,11 @@
 <div class="stuck">
   <h2>막힐 때</h2>
   <div class="q">· 구글 계정이 여러 개일 때</div>
-  <div>1번 화면 오른쪽 위 동그라미 → 플레이 스토어에 쓰는 계정 고름 → 이 페이지로 와서 1번부터 다시</div>
+  <div><span class="sn">1</span> 화면 오른쪽 위 동그라미 → 플레이 스토어에 쓰는 계정 고름 → 이 페이지로 와서 <span class="sn">1</span>부터 다시</div>
   <img src="join/acct.jpg" alt="" loading="lazy">
-  <div class="q">· 3번에 (사전 체험판)·설치가 안 보일 때</div>
-  <div>10분쯤 뒤 3번만 다시</div>
-  <div class="q">· 아이폰</div>
-  <div>안 됩니다</div>
+  <div class="q">· <span class="sn">3</span>에 (사전 체험판)·설치가 안 보일 때</div>
+  <div>10분쯤 뒤 <span class="sn">3</span>만 다시</div>
+  <div class="q">· 아이폰은 추후 출시</div>
 </div>
 
 <div class="foot">14일 동안 지우지 말아 주십시오 🙏</div>
