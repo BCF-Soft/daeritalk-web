@@ -4,6 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대리톡 테스트 참여</title>
+<script>
+  // 카톡·네이버·인스타 등 앱 안 브라우저는 구글 로그인이 안 돼 있어 막힘 → 기본 브라우저(크롬)로 바로 넘긴다(대표님 10/20)
+  (function () {
+    var ua = navigator.userAgent, url = location.href;
+    var chrome = 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+    if (/KAKAOTALK/i.test(ua)) {
+      location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(url);
+      if (/android/i.test(ua)) setTimeout(function () { if (!document.hidden) location.href = chrome; }, 1500); // 카톡이 안 넘겼으면
+    } else if (/ Line\//i.test(ua)) {
+      if (!/openExternalBrowser=1/.test(url)) location.href = url + (url.indexOf('?') < 0 ? '?' : '&') + 'openExternalBrowser=1';
+    } else if (/android/i.test(ua) && /NAVER|Instagram|FBAN|FBAV|DaumApps|BAND|; wv\)/i.test(ua)) {
+      location.href = chrome;
+    }
+  })();
+</script>
 <meta property="og:title" content="대리톡 테스트 참여">
 <meta property="og:description" content="화면 보면서 따라 누르면 설치 끝">
 <meta property="og:image" content="https://bcf-soft.github.io/daeritalk-web/icon.png">
