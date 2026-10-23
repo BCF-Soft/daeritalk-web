@@ -4,123 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대리톡 테스트 참여</title>
-<script>
-  // 카톡·네이버·인스타 등 앱 안 브라우저는 구글 로그인이 안 돼 있어 막힘 → 기본 브라우저(크롬)로 바로 넘긴다(대표님 10/20)
-  (function () {
-    var ua = navigator.userAgent, url = location.href;
-    var chrome = 'intent://' + url.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
-    if (/KAKAOTALK/i.test(ua)) {
-      location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(url);
-      if (/android/i.test(ua)) setTimeout(function () { if (!document.hidden) location.href = chrome; }, 1500); // 카톡이 안 넘겼으면
-    } else if (/ Line\//i.test(ua)) {
-      if (!/openExternalBrowser=1/.test(url)) location.href = url + (url.indexOf('?') < 0 ? '?' : '&') + 'openExternalBrowser=1';
-    } else if (/android/i.test(ua) && /NAVER|Instagram|FBAN|FBAV|DaumApps|BAND|; wv\)/i.test(ua)) {
-      location.href = chrome;
-    }
-  })();
-</script>
 <meta property="og:title" content="대리톡 테스트 참여">
-<meta property="og:description" content="화면 보면서 따라 누르면 설치 끝">
+<meta property="og:description" content="테스터 모집이 끝났습니다">
 <meta property="og:image" content="https://bcf-soft.github.io/daeritalk-web/icon.png">
 <style>
-  :root { --bg:#130f38; --card:#1f1a52; --line:#2f2970; --text:#fff; --muted:#b9b6d8; --accent:#fdd456; --ink:#130f38; --ok:#4ade80; --red:#ea4335; color-scheme: dark; }
+  :root { --bg:#130f38; --card:#1f1a52; --line:#2f2970; --text:#fff; --muted:#b9b6d8; --accent:#fdd456; color-scheme: dark; }
   * { box-sizing: border-box; }
   body { background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, "Noto Sans KR", sans-serif; max-width: 480px; margin: 0 auto; padding: 28px 16px 48px; line-height: 1.5; }
-  .top { display:flex; align-items:center; gap:16px; margin-bottom: 6px; }
+  .top { display:flex; align-items:center; gap:16px; margin-bottom: 18px; }
   .top img { width:64px; height:64px; border-radius:16px; }
   .top h1 { margin:0; font-size:32px; color:var(--accent); }
-  .lead { margin: 8px 0 18px; font-size:18px; font-weight:600; }
-  .warn { display:none; background:#5a2330; border-radius:12px; padding:14px 16px; margin-bottom:18px; font-weight:700; }
-  .same { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 14px; margin-bottom:6px; font-size:16px; }
-  .same b { color:var(--accent); }
-  .step { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px; margin:18px 0; }
-  .head { display:flex; align-items:center; gap:12px; font-size:22px; font-weight:800; margin-bottom:12px; }
-  .n { flex:none; width:40px; height:40px; border-radius:20px; background:var(--accent); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:20px; }
-  a.go { display:block; text-align:center; padding:14px; border-radius:14px; background:var(--accent); color:var(--ink); font-size:18px; font-weight:800; text-decoration:none; margin-bottom:14px; }
-  .sc { margin:14px 0 4px; }
-  .sc .t { font-size:17px; font-weight:700; margin-bottom:8px; display:flex; gap:8px; }
-  .sc .t .k { flex:none; color:var(--accent); }
-  .sc img { display:block; width:100%; border-radius:12px; border:1px solid var(--line); }
-  .btn { display:inline-block; padding:0 6px; border:2px solid var(--red); border-radius:6px; color:#fff; white-space:nowrap; }
-  .ok { color:var(--ok); }
-  .stuck { margin-top:24px; background:var(--card); border-radius:16px; padding:16px; font-size:16px; }
-  .stuck h2 { margin:0 0 10px; font-size:20px; color:var(--accent); }
-  .stuck .q { font-weight:800; margin-top:14px; }
-  .sn { display:inline-flex; width:24px; height:24px; border-radius:12px; background:var(--accent); color:var(--ink); align-items:center; justify-content:center; font-size:15px; font-weight:800; vertical-align:-3px; margin:0 3px; }
-  .stuck img { display:block; width:100%; border-radius:12px; border:1px solid var(--line); margin-top:8px; }
-  .foot { margin-top:22px; font-size:16px; text-align:center; font-weight:700; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px 16px; }
+  .card h2 { margin:0 0 10px; font-size:22px; }
+  .card p { margin:8px 0 0; font-size:17px; color:var(--muted); }
 </style>
 </head>
 <body>
 <div class="top"><img src="icon.png" alt=""><h1>대리톡</h1></div>
-<div class="lead">화면 보면서 따라 누르면 설치 끝</div>
-<div class="warn" id="warn">안드로이드 폰에서 열어 주십시오 (아이폰은 추후 출시)</div>
-<div class="same">1 · 2 · 3 모두 <b>플레이 스토어에 쓰는 구글 계정 하나</b>로 합니다</div>
-
-<div class="step" data-k="1">
-  <div class="head"><span class="n">1</span>모임 가입</div>
-  <a class="go" href="https://groups.google.com/g/daeritalk-tester" target="_blank">모임 가입하러 가기</a>
-
-  <div class="sc">
-    <div class="t"><span class="k">⓪</span><span>오른쪽 위에 <span class="btn">로그인</span>이 보이면 누르고, 플레이 스토어에 쓰는 구글 계정으로 로그인</span></div>
-    <img src="join/0a.jpg" alt="" loading="lazy">
-    <img src="join/0b.jpg" alt="" loading="lazy" style="margin-top:8px">
-  </div>
-  <div class="sc">
-    <div class="t"><span class="k">①</span><span>"권한이 없습니다"가 떠도 정상입니다. 위쪽 <span class="btn">그룹 참여</span> 누름</span></div>
-    <img src="join/1a.jpg" alt="" loading="lazy">
-  </div>
-  <div class="sc">
-    <div class="t"><span class="k">②</span><span>오른쪽 아래 <span class="btn">그룹 참여</span> 한 번 더</span></div>
-    <img src="join/1b.jpg" alt="" loading="lazy">
-  </div>
-  <div class="sc">
-    <div class="t"><span class="k">③</span><span><span class="ok">이 그림이 나오면 가입 끝.</span> 이 창 닫고 돌아와서 <span class="sn">2</span></span></div>
-    <img src="join/1c.jpg" alt="" loading="lazy">
-  </div>
+<div class="card">
+  <h2>테스터 모집이 끝났습니다</h2>
+  <p>참여해 주셔서 감사합니다.</p>
+  <p>이미 참여하신 기사님은 플레이 스토어에서 대리톡을 그대로 쓰시고 업데이트하시면 됩니다.</p>
 </div>
-
-<div class="step" data-k="2">
-  <div class="head"><span class="n">2</span>테스터 되기</div>
-  <a class="go" href="https://play.google.com/apps/testing/com.bcfsoft.daeritalk" target="_blank">테스터 되러 가기</a>
-
-  <div class="sc">
-    <div class="t"><span class="k">①</span><span>영어 화면입니다. 맨 아래 파란 <span class="btn">Become a tester</span> 누름</span></div>
-    <img src="join/2a.jpg" alt="" loading="lazy">
-  </div>
-  <div class="sc">
-    <div class="t"><span class="k">②</span><span><span class="ok">You are a tester.</span> 가 나오면 파란 글씨 <span class="btn">download it on Google Play</span> 누름</span></div>
-    <img src="join/2b.jpg" alt="" loading="lazy">
-  </div>
-</div>
-
-<div class="step" data-k="3">
-  <div class="head"><span class="n">3</span>설치</div>
-  <div class="sc">
-    <div class="t"><span class="k">①</span><span>플레이 스토어가 열립니다. 이름 끝에 <b>(사전 체험판)</b>이 보이면 맞습니다. <span class="btn">설치</span> 누름</span></div>
-    <img src="join/3a.jpg" alt="" loading="lazy">
-  </div>
-  <a class="go" href="https://play.google.com/store/apps/details?id=com.bcfsoft.daeritalk" style="margin-top:14px;margin-bottom:0">플레이 스토어가 안 열리면 여기</a>
-</div>
-
-<div class="stuck">
-  <h2>막힐 때</h2>
-  <div class="q">· 구글 계정이 여러 개일 때</div>
-  <div><span class="sn">1</span> 화면 오른쪽 위 동그라미 → 플레이 스토어에 쓰는 계정 고름 → 이 페이지로 와서 <span class="sn">1</span>부터 다시</div>
-  <img src="join/acct.jpg" alt="" loading="lazy">
-  <div class="q">· 두 번째 폰에서 <span class="sn">3</span>이 "항목을 찾을 수 없습니다"일 때</div>
-  <div><b>같은 구글 계정</b>: 그 폰 플레이 스토어에 계정이 여러 개라 다른 계정으로 열린 것입니다. 플레이 스토어 오른쪽 위 동그라미 → 테스터로 가입한 계정으로 바꾸고 <span class="sn">3</span> 다시. 막 테스터가 됐으면 10분 뒤 <span class="sn">3</span> 다시</div>
-  <img src="join/playacct.jpg" alt="" loading="lazy">
-  <div style="margin-top:10px"><b>다른 구글 계정</b>: 그 계정으로 <span class="sn">1</span><span class="sn">2</span>부터 다시. 대리톡 투폰 연결은 구글 계정과 상관없습니다</div>
-  <div class="q">· <span class="sn">3</span>에 (사전 체험판)·설치가 안 보일 때</div>
-  <div>10분쯤 뒤 <span class="sn">3</span>만 다시</div>
-  <div class="q">· 아이폰은 추후 출시</div>
-</div>
-
-<div class="foot">14일 동안 지우지 말아 주십시오 🙏</div>
-
-<script>
-  if (!/android/i.test(navigator.userAgent)) document.getElementById('warn').style.display = 'block';
-</script>
 </body>
 </html>
